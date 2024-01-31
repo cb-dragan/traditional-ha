@@ -11,6 +11,7 @@ The setup consists of the following containers:
 - Linux box with Firefox accessible via VNC from an external browser
 
 The setup is self sufficient and does not require any modifications on the Docker host or anywhere else outside of the docker compose environment, except for the persistence - local paths on the docker host are used as persistence volumes. NFS volumes are not used at the moment.
+Controller 1 and Controller 2 share the same $JENKINS_HOME dir.
 
 The Operations Center and both controllers are behind HAProxy. 
 - If a request comes to HAProxy with $OC_URL host header, it is forwarded to the operations center container
@@ -37,7 +38,20 @@ A helper script to:
 ## Deploy
 - Examine `env.sh` and modify if needed.
 - Examine `docker-compose.yaml.template` and modify if needed.
-- Run `up.sh`. 
+- Run `up.sh`.
+
+## Operate
+The `browser` container exposes port 6080 to the docker host. 
+To access the Operations Center:
+- open a browser and point it to http://docker-host-ip:6080. This will open a VNC session to the Linux container.
+- From the start menu open Firefox browser.
+- Point the Firefox browser to http://$OC_URL  (by default this is http://oc.ha/ )
+- In the Operations Center, create a client controller item.
+- Push the configuration to http://$CLIENTS_URL  (by default this is http://client.ha/ )
+- Try to access http://$CLIENTS_URL/ in Firefox (VNC)
+- Install HA plugin (active/active) on http://$CLIENTS_URL/
+- Controller 2 will begin starting when controller 1 is ready
+- You can see the HA status in the controllers` Manage Jenkins section
 
 ## Stop
 Run `down.sh`. This will issue docker compose down to stop the running containers.
