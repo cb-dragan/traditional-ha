@@ -17,20 +17,21 @@ The Operations Center and both controllers are behind HAProxy.
 - If a request comes with $CLIENTS_URL host header, it is load balanced between all client controllers
 - The load balancing for client controllers has sticky sessions enabled
 
-## env.sh
+### env.sh
 - `OC_URL` is the URL you want the operations center to respond on.
 - `CLIENTS_URL` is for the controllers. There is only one URL for both controllers.
 - `DOCKER_IMAGE_OC` and `DOCKER_IMAGE_CLIENT` are the CB CI versions on operations center and controllers
 - `IP_PREFIX` is a prefix for the internal docker compose network
 - `PERSISTENCE_PREFIX` is the path for the persistence volumes on the docker host
 
-## docker-compose.yaml.template
-This template is used to render the `docker-compose.yaml` file using the environment variables in `env.sh`. Please do not modify docker-compose.yaml directly, since it will be overwritten by `up.sh`.
+### docker-compose.yaml.template
+This template is used to render the `docker-compose.yaml` file using the environment variables in `env.sh`. Please do not modify docker-compose.yaml directly, since it will be overwritten by `up.sh`. Modify this template instead.
   
-## up.sh
+### up.sh
 A helper script to:
 - Create the persistence volumes
-- Render the docker-compose.yaml from the template. `sudo` is used to create the persistence volumes and assign the permissions.
+- Render the docker-compose.yaml from the template.
+  - `sudo` is used to create the persistence volumes and assign the permissions.
 - Run `docker compose up`
 
 ## Deploy
