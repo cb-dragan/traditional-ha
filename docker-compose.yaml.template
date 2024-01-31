@@ -137,11 +137,6 @@ services:
         condition: service_healthy
     extra_hosts:
       - "${OC_URL}:${OC_IP}"
-#    healthcheck:
-#      test: wget --quiet --tries=1 --spider http://oc.ha/ || exit 1  #curl --fail http://${OC_URL}/ || exit 1
-#      interval: 10s
-#      timeout: 3s
-#      retries: 50
 
   browser:
     image: dorowu/ubuntu-desktop-lxde-vnc
@@ -154,9 +149,6 @@ services:
     networks:
       demo-network:
         ipv4_address: ${BROWSER_IP}
-#    depends_on:
-#      haproxy:
-#        condition: service_healthy
 
 networks:
   demo-network:
@@ -164,16 +156,3 @@ networks:
     ipam:
       config:
         - subnet: ${IP_PREFIX}.0.0/16
-
-
-#  nginx:
-#  #    image: nginx:alpine
-#  #    volumes:
-#  #      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-#  #    ports:
-#  #      - "8085:8085"
-#     #depends_on:
-#        #   ha-client-controller-1:
-#           #     condition: service_healthy
-#              #   ha-client-controller-2:
-#                 #     condition: service_healthy
