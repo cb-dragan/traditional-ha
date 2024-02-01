@@ -67,3 +67,10 @@ Run `down.sh`. This will issue docker compose down to stop the running container
 ## Clean up
 - Stop the running containers using `down.sh`. Then,
 - Run `delete_volumes.sh`. This will delete the persistence directories on the host (docker volumes)
+ 
+
+
+## TODO
+- Creating agent key pair in up.sh
+- Fill the public part automatically in docker compose template (with envsubst in up.sh)
+- CasC
