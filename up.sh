@@ -7,6 +7,7 @@ source env.sh
 # If this is the first run, the persistent dirs should be created
 if [ ! -d "${OC_PERSISTENCE}" ]; then
   echo "Creating volumes..."
+  sudo mkdir ${PERSISTENCE_PREFIX}
   sudo mkdir ${CONTROLLER2_CACHES}
   sudo mkdir ${CONTROLLER1_CACHES}
   sudo mkdir ${CONTROLLER_PERSISTENCE}
