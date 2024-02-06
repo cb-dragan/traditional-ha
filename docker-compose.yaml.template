@@ -32,6 +32,14 @@ services:
     networks:
       demo-network:
         ipv4_address: ${OC_IP}
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 1G
 
   ha-client-controller-1:
     image: ${DOCKER_IMAGE_CLIENT}
@@ -67,6 +75,15 @@ services:
     networks:
       demo-network:
         ipv4_address: ${CLIENT1_IP}
+
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 1G
 
   ha-client-controller-2:
     image: ${DOCKER_IMAGE_CLIENT}
@@ -105,6 +122,15 @@ services:
       demo-network:
         ipv4_address: ${CLIENT2_IP}
 
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 1G
+
 
   agent:
     build:
@@ -123,7 +149,14 @@ services:
         ipv4_address: ${AGENT_IP}
     environment:
       - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCsjZisGoSB/00geKfQRRkFvSmOJZnsp5D4x0qSrcUzfcklgQQf5ARADg9FhOVV6C4LkzPIZ1dVy8HKUKLT4KhkTsjPtzj1lJHMulNhc1Kco2VwQi4mVDwQmGqKz7hKjFkfp3hGE76AAhMeHZWqT86VNmAsgTKBd/llNVJ97RIp+bE/9vVF2XtWjjXhx2v3UIh9m2j7y+PNvWiW96bnFkQqvuk/Ig2zVxI2xt/pkelQAgUgOkre7ICJTtJUdKXPQ3pIhPIPhAinRrfl+H3mrHTQgozg91nroT83n2r2lMGCIBV1moVItJH6NMFEwkvW7aDmGLnz0rznGqsGLhOyxSfCaq6rKfFNoSxT03ChAelEpFs3DO2W6jfG8gC/AaYO6spabYEM296ioCH91g9jWsH22o2RUHW5yui9fJP9Gu9zTS8pOuXerGdf2zeFV2ZJHrg2w0f7WP8h62Zet+Zdbm8gxf710n8fvbjqdzsxnYIn+2Cu9zF6R4uuIyuxDd2q60=
-
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 100M
 
   haproxy:
     image: haproxy:alpine
