@@ -18,7 +18,19 @@ The Operations Center and both controllers are behind HAProxy.
 - If a request comes with $CLIENTS_URL host header, it is load balanced between all client controllers
 - The load balancing for client controllers has sticky sessions enabled
 
+## Prerequisites
+
+- Docker engine
+- Enough disk space on Docker host to keep $JENKINS_HOME folders of the operations center and controllers (typically 2-3GB for demo purposees)
+- Enough RAM to run the OC and both client controllers (1-2GB each for demo purposes)
+- If you want to access the OC and controllers from outside, ex. your laptop's browser, you need to have port 80 free on your Docker host so that HAProxy can be exposed on it. If you don't want it exposed, comment the line in docker-compose.yaml.template
+- 
+  
+## Files
+
 ### env.sh
+Used to define some environment variables used in docker-compose.yaml.template
+
 - `OC_URL` is the URL you want the operations center to respond on.
 - `CLIENTS_URL` is for the controllers. There is only one URL for both controllers.
 - `DOCKER_IMAGE_OC` and `DOCKER_IMAGE_CLIENT` are the CB CI versions on operations center and controllers
@@ -29,16 +41,16 @@ The Operations Center and both controllers are behind HAProxy.
 This template is used to render the `docker-compose.yaml` file using the environment variables in `env.sh`. Please do not modify docker-compose.yaml directly, since it will be overwritten by `up.sh`. Modify this template instead.
   
 ### up.sh
-A helper script to:
-- Create the persistence volumes
-- Render the docker-compose.yaml from the template.
+A helper script.
+- Creates the persistence volumes
+- Renders the docker-compose.yaml from the template.
   - `sudo` is used to create the persistence volumes and assign the permissions.
-- Run `docker compose up`
+- Runs `docker compose up`
 
 ## Deploy
 - Examine `env.sh` and modify if needed.
 - Examine `docker-compose.yaml.template` and modify if needed.
-- Run `up.sh`.
+- Run `up.sh` .
 
 ## Operate
 The `browser` container exposes port 6080 to the docker host. 
@@ -53,7 +65,10 @@ To access the Operations Center:
 - Controller 2 will begin starting when controller 1 is ready
 - You can see the HA status in the controllers` Manage Jenkins section
 
-### Agent
+If you don't want to use the provided browser container, you could use a browser on your laptop, but you need to put $OC_URL and $CLIENTS_URL in your `hosts` file, pointing to the Docker host IP address. HAProxy is exposed to the Docker host on port 80 by default.
+
+
+### Agent (optional)
 
 Create a key pair with: `ssh-keygen -t rsa -f agent-key`
 
@@ -74,3 +89,4 @@ Run `down.sh`. This will issue docker compose down to stop the running container
 - Creating agent key pair in up.sh
 - Fill the public part automatically in docker compose template (with envsubst in up.sh)
 - CasC
+- SSL
