@@ -1,6 +1,13 @@
 # traditional-ha
 Docker compose setup for a traditional Cloudbees CI installation in HA (active/active) mode
 
+## TLDR
+- `up.sh` to start
+- `down.sh` to stop
+- `clean.sh` to cleanup
+- See [How to operate](#operate) section below
+
+
 ## Intro
 The setup consists of the following containers:
 - Operations center
@@ -52,10 +59,10 @@ A helper script.
 - Examine `docker-compose.yaml.template` and modify if needed.
 - Run `up.sh` .
 
-## Operate
+## Operate <a id="operate"></a>
 The `browser` container exposes port 6080 to the docker host. 
 To access the Operations Center:
-- open a browser and point it to http://docker-host-ip:6080. This will open a VNC session to the Linux container.
+- open a browser on your laptop and point it to http://docker-host-ip:6080. This will open a VNC session to the Linux container.
 - From the start menu open Firefox browser.
 - Point the Firefox browser to http://$OC_URL  (by default this is http://oc.ha/ )
 - In the Operations Center, create a client controller item.
