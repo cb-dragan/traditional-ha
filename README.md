@@ -93,7 +93,8 @@ Run `down.sh`. This will issue docker compose down to stop the running container
 
 
 ## TODO
-- Creating agent key pair in up.sh
-- Fill the public part automatically in docker compose template (with envsubst in up.sh)
 - CasC
+- Automate agent
+  - Creating agent key pair in up.sh
+  - Fill the public part automatically in docker compose template (with envsubst in up.sh)
 - SSL
