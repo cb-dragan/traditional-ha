@@ -3,7 +3,8 @@
 # https://docs.cloudbees.com/docs/cloudbees-ci/latest/ha-install-guide/specific-ha-installation-traditional
 # https://www.youtube.com/watch?v=Qkf9HaA2wio
 
-# ! Do not modify docker-compose.yaml directly, it wil be overwritten by up.sh. Instead, modify this template and env.sh
+# This template will get rendered to docker-compose.yaml by up.sh
+# ! Do not modify the generated docker-compose.yaml directly, it wil be overwritten by up.sh. Instead, modify this template and env.sh
 
 version: '3'
 
