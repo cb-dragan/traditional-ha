@@ -4,7 +4,7 @@ Docker compose setup for a traditional Cloudbees CI installation in HA (active/a
 ## TLDR
 - `up.sh` to start
 - `down.sh` to stop
-- `clean.sh` to cleanup
+- `delete_volumes.sh` to cleanup
 - See [How to operate](#operate) section below
 
 
